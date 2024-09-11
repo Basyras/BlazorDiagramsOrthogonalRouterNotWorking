@@ -1,0 +1,66 @@
+﻿@using Blazor.Diagrams
+@using Blazor.Diagrams.Components
+@using Blazor.Diagrams.Core.Anchors
+@using Blazor.Diagrams.Core.Geometry
+@using Blazor.Diagrams.Core.Models
+@using Blazor.Diagrams.Core.PathGenerators
+@using Blazor.Diagrams.Core.Routers
+@using Blazor.Diagrams.Options
+<div class="diagram-container">
+    <CascadingValue Value="Diagram" IsFixed="true">
+        <DiagramCanvas></DiagramCanvas>
+    </CascadingValue>
+</div>
+
+@code {
+    private BlazorDiagram Diagram { get; set; } = null!;
+
+    protected override void OnInitialized()
+    {
+        var options = new BlazorDiagramOptions
+            {
+                AllowMultiSelection = true,
+                Zoom =
+            {
+                Enabled = false,
+            },
+                Links =
+            {
+                DefaultRouter = new OrthogonalRouter(),
+                DefaultPathGenerator = new StraightPathGenerator()
+            },
+            };
+
+        Diagram = new BlazorDiagram(options);
+        Diagram.RegisterComponent<CustomNodeModel, CustomNodeWidget>();
+        var nodeA = Diagram.Nodes.Add(new CustomNodeModel(position: new Point(0, 0), true)
+            {
+                Title = "Title"
+            });
+        var portA = nodeA.AddPort(PortAlignment.Bottom);
+        var anchorA = new SinglePortAnchor(portA);
+        var nodeB = Diagram.Nodes.Add(new CustomNodeModel(position: new Point(200, 0), true)
+            {
+                Title = "Title"
+            });
+        var portB = nodeB.AddPort(PortAlignment.Top);
+        var anchorB = new SinglePortAnchor(portB);
+        Diagram.Links.Add(new LinkModel(anchorA, anchorB));
+
+
+        var nodec = Diagram.Nodes.Add(new CustomNodeModel(position: new Point(0, 200), false)
+            {
+                Title = "Title"
+            });
+        var portc = nodec.AddPort(PortAlignment.Bottom);
+        var anchorc = new SinglePortAnchor(portc);
+        var noded = Diagram.Nodes.Add(new CustomNodeModel(position: new Point(200, 200), false)
+            {
+                Title = "Title"
+            });
+        var portd = noded.AddPort(PortAlignment.Top);
+        var anchord = new SinglePortAnchor(portd);
+        Diagram.Links.Add(new LinkModel(anchorc, anchord));
+
+    }
+}

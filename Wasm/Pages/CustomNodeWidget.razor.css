@@ -1,0 +1,69 @@
+﻿node {
+    display: flex;
+    flex-direction: column;
+}
+
+border {
+    display: flex;
+    position: relative;
+    width: 64px;
+    height: 64px;
+    outline: 1px solid black;
+}
+
+title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+contentText {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+ports {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+::deep .diagram-port {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background-color: black;
+}
+
+    ::deep .diagram-port.top {
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    ::deep .diagram-port.left {
+        left: 0px;
+        bottom: 0px;
+        top: 0px;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+
+    ::deep .diagram-port.right {
+        right: 0px;
+        bottom: 0px;
+        top: 0px;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+
+    ::deep .diagram-port.bottom {
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        margin-left: auto;
+        margin-right: auto;
+    }
